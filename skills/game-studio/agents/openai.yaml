@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Studio"
+  short_description: "Build, run, and QA browser games."
+  default_prompt: "Use Game Studio to build a polished playable browser game, run it locally, and verify it with screenshots."
