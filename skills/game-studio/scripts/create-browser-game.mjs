@@ -10,10 +10,16 @@ function arg(name, fallback) {
 
 const name = arg("name", "codex-game");
 const engine = arg("engine", "canvas").toLowerCase();
+const template = arg("template", "arcade").toLowerCase();
 const root = path.resolve(process.cwd(), name);
 
 if (!["canvas", "phaser", "three"].includes(engine)) {
   console.error("engine must be one of: canvas, phaser, three");
+  process.exit(1);
+}
+const templateNames = ["arcade", "tower-defense", "platformer", "mobile-portrait", "roguelike", "top-down-shooter", "puzzle", "idle"];
+if (!templateNames.includes(template)) {
+  console.error(`template must be one of: ${templateNames.join(", ")}`);
   process.exit(1);
 }
 if (fs.existsSync(root)) {
@@ -151,5 +157,30 @@ addEventListener("keydown",e=>keys.add(e.key)); addEventListener("keyup",e=>keys
 `;
 
 fs.writeFileSync(path.join(root, "src", "main.js"), engine === "phaser" ? phaserMain : engine === "three" ? threeMain : canvasMain);
-console.log(`Created ${engine} game at ${root}`);
+const templateNotes = {
+  arcade: ["Collectible score loop", "Hazards", "Restart", "Desktop controls"],
+  "tower-defense": ["Map path", "Build pads", "Tower targeting", "Wave economy", "Upgrade/sell UI"],
+  platformer: ["Movement controller", "Jump feel", "Hazards", "Checkpoints", "Goal"],
+  "mobile-portrait": ["Portrait-first HUD", "Large touch targets", "Audio unlock", "Safe-area padding"],
+  roguelike: ["Room loop", "Upgrade pool", "Run state", "Enemy scaling", "Reward screen"],
+  "top-down-shooter": ["Twin-stick controls", "Enemy AI", "Projectiles", "Pickups", "Wave manager"],
+  puzzle: ["Board model", "Rule validator", "Undo/restart", "Level data", "Progression"],
+  idle: ["Resource model", "Upgrade tree", "Offline progress", "Save/load", "Number formatting"]
+};
+fs.writeFileSync(path.join(root, "GAME_TEMPLATE.md"), `# ${name} Template
+
+Engine: ${engine}
+Template: ${template}
+
+## Starter Focus
+
+${templateNotes[template].map((item) => `- ${item}`).join("\n")}
+
+## Next Build Steps
+
+- Replace the generic starter loop with the template-specific core loop.
+- Keep start/restart, HUD, feedback, win/loss, and mobile controls where relevant.
+- Run \`npm install\`, \`npm run dev\`, and verify desktop plus narrow viewport behavior.
+`);
+console.log(`Created ${engine} ${template} game starter at ${root}`);
 console.log("Next: npm install && npm run dev");
