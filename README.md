@@ -71,6 +71,23 @@ Use game-studio to add an Unreal Engine C++ health component and describe Bluepr
 Use game-studio as a 40-person AI studio and make a production plan for a cozy farming RPG.
 ```
 
+### Completed Example
+
+- **Spider Solitaire**: a mobile-friendly H5/PWA Spider Solitaire game completed with Codex Game Studio Skill. The project includes touch drag controls, a 10-column mobile layout, full-screen start and settings screens, 1-suit / 2-suit / 4-suit difficulty modes, animated dealing and completed-run collection, a tutorial carousel, save/continue support, bilingual UI, music, sound effects, and static web deployment.
+- Live demo: https://spider-solitaire-isclin.pages.dev/
+- Repository: https://github.com/isclin123/spider-solitaire-by-codex-gamestudio-skill
+
+Example request:
+
+```text
+Use game-studio to build a mobile-friendly Spider Solitaire game, then polish the UI, touch controls, animations, sound, tutorial, settings, deployment, and GitHub release.
+```
+
+中文案例：
+
+```text
+用 game-studio 开发一个手机能玩的蜘蛛纸牌游戏，并继续打磨 UI、触控拖拽、动画、音效、教程、设置、静态部署和 GitHub 发布。
+```
 ### Included Resources
 
 - `skills/game-studio/SKILL.md`: core workflow and trigger instructions
